@@ -21,13 +21,13 @@
                             <!-- <p>             -->
                                 <h4 class="pb-4 text-center">Please fill with your details</h4>
                             <!-- </p> -->
-                            <form class="" action="controller/signup.php" method="POST" enctype="multipart/form-data">	
+                            <form class="" action="controller/index.php" method="POST" enctype="multipart/form-data">	
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="Firstname" type="text" name="fname" class="form-control">
+                                        <input required placeholder="Firstname" type="text" name="firstname" class="form-control">
                                     </div>                            
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="Lastname" type="text" name="lname" class="form-control">
+                                        <input required placeholder="Lastname" type="text" name="lastname" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -40,11 +40,11 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="********" type="password" name="pass" class="form-control">
+                                        <input required placeholder="********" type="password" name="password" class="form-control">
                                     </div>
                                     
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="********" type="password" name="passw" class="form-control">
+                                        <input required placeholder="********" type="password" name="cpassword" class="form-control">
                                     </div>
                                 </div>
                                     <button type="submit" class="btn mt-4 btn-primary">Sign up</button>

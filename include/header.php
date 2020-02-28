@@ -12,6 +12,16 @@
 
     <link rel="stylesheet" href="../css/main.css">
     <script src="../script/index.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../script/jquery.min.js"></script>
+    <script src="../script/bootstrap.min.js"></script>
+
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="script/index.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="script/jquery.min.js"></script>
+    <script src="script/bootstrap.min.js"></script>
 
     <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
