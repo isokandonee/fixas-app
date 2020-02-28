@@ -51,10 +51,11 @@
                     </li>
                 </ul>
             
-                <form class="form-inline nav-right" action="controller/login.php">
+                <form class="form-inline nav-right" action="../controller/login.php">
                     <input class="form-control mr-sm-2" type="text" placeholder="Email">
                     <input class="form-control mr-sm-2" type="text" placeholder="Password">
                     <button class="btn btn-primary" type="submit">Login</button>
+                    <button class="btn ml-2 btn-primary" type="submit" href="../controller/logout.php">Logout</button>
                 </form>
             </div>
         </nav>

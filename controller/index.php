@@ -8,7 +8,6 @@ if (isset($_POST['firstname'])) {
         $password = $_POST['password'];
         $cpassword = $_POST['cpassword'];
         $phone = $_POST['phone'];
-        // $date =  date('j F Y h:i:s');
 
         // Check for empty fields
         if ( empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($cpassword) ) {
@@ -27,13 +26,7 @@ if (isset($_POST['firstname'])) {
             header("Location: ../index.php?error=incorrectdetails&mail=".$email);
             exit();
         }
-
-        // Phone number validation
-        // elseif (!preg_match('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/', $phone)) {
-        //     header("Location: ../index.php?error=incorrectphonenumber(+234)&firstname=".$firstname."lastname=".$lastname."mail=".$email);
-        //     exit();
-        // }
-
+        
         // password validation
         elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
             header("Location: ../index.php?error=weakpassword&firstname=".$firstname."lastname=".$lastname."mail=".$email);
@@ -48,22 +41,20 @@ if (isset($_POST['firstname'])) {
                 else {
                     $hpassword = password_hash($password, PASSWORD_DEFAULT);
                     $insert = mysqli_query($conn, "INSERT INTO user.user_tb (first_name,last_name,email,password,phone,created_at) 
-                    VALUES ($firstname,$lastname,$email,$hpassword,$phone,current_date())");
+                    VALUES ('$firstname','$lastname','$email','$hpassword','$phone',current_date())");
                     if ($insert) {
-                        session_start();
-                        header("Location: ../dashboard/index.php?signup=success");
+                        header("Location: ../login.php?signup=success");
                         exit();
                     }
                     else {
-                        echo mysqli_error($conn);
-                        // header("Location: ../index.php?signup=notsuccessful");
-                        // exit();
+                        header("Location: ../index.php?error=emailalreadytaken&firstname=".$firstname."lastname=".$lastname);
+                        exit();
                     }
                 }
         mysqli_close($conn);
 
 } else {
-    header("Location: ../index.php");
+    header("Location: ../index.php?error=notsuccessful");
     exit();
     }
 
