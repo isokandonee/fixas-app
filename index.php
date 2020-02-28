@@ -22,6 +22,7 @@
                                 <h4 class="pb-4 text-center">Please fill with your details</h4>
                             <!-- </p> -->
                             <form class="" action="controller/index.php" method="POST" enctype="multipart/form-data">	
+                                <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <input required placeholder="Firstname" type="text" name="firstname" class="form-control">
@@ -47,7 +48,7 @@
                                         <input required placeholder="********" type="password" name="cpassword" class="form-control">
                                     </div>
                                 </div>
-                                    <button type="submit" class="btn mt-4 btn-primary">Sign up</button>
+                                    <button type="submit" class="btn mt-4 btn-primary float-right">Sign up</button>
                                     
                             </form>
                         </div>

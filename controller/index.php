@@ -1,7 +1,7 @@
 <?php
 
 require "connect.php";
-if (isset($_POST['firstname'])) {
+if (isset($_POST['token'])) {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $email = $_POST['email'];
@@ -26,7 +26,7 @@ if (isset($_POST['firstname'])) {
             header("Location: ../index.php?error=incorrectdetails&mail=".$email);
             exit();
         }
-        
+
         // password validation
         elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
             header("Location: ../index.php?error=weakpassword&firstname=".$firstname."lastname=".$lastname."mail=".$email);
