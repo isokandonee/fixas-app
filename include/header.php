@@ -27,20 +27,27 @@
 </head>
 <body>
     <header>
-        <div class="container col-sm-8 bg-light">
-            <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="index.php">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php if ($CURRENT_PAGE == "About") {?>active<?php }?>" href="about.php">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?php if ($CURRENT_PAGE == "Contact") {?>active<?php }?>" href="contact.php">Contact</a>
-            </li>
-            </ul>
-        </div>
-
+        <nav class="navbar navbar-expand-sm bg-light">
+            <div class="container col-sm-11">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($CURRENT_PAGE == "About") {?>active<?php }?>" href="about.php">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if ($CURRENT_PAGE == "Contact") {?>active<?php }?>" href="contact.php">Contact</a>
+                    </li>
+                </ul>
+            
+                <form class="form-inline nav-right" action="controller/login.php">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Email">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Password">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </form>
+            </div>
+        </nav>
         <script>
             $('.menu, .overlay').click(function () {
                 $('.menu').toggleClass('clicked');
