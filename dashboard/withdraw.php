@@ -15,20 +15,16 @@ include "../include/header.php";
                 <div class="container pt-5">			
                     <div class="row">
                         <div class="col-md-8 py-5 shadow border">
-                            <h4 class="pb-4 text-center">Create Account</h4>
-                            <form class="" action="../controller/account.php" method="POST" enctype="multipart/form-data">
+                            <h4 class="pb-4 text-center">Withdrawal Form</h4>
+                            <form class="" action="../controller/withdraw.php" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="account">Account Type</label>
-                                        <select class="form-control" id="account">
-                                            <option value="1">Current</option>
-                                            <option value="2">Savings</option>
-                                            <option value="3">Domiciliary</option>
-                                        </select>
+                                        <label for="">Amount to withdraw</label>
+                                        <input required placeholder="Amount" type="number" name="amount" class="form-control">
                                     </div>
                                 </div>
-                                    <button type="submit" class="btn mt-4 btn-primary float-right">Create Account</button>                                    
+                                    <button type="submit" class="btn mt-4 btn-primary float-right">Withdraw</button>                                    
                             </form>
                         </div>
                     </div>
