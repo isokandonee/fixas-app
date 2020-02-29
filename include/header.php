@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@
     <script src="../script/bootstrap.min.js"></script>
 
     
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <script src="script/index.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="script/jquery.min.js"></script>
@@ -25,8 +26,6 @@
 
     <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>Fixas-Bank</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, Fixas-bank App' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -41,31 +40,43 @@
             <div class="container col-sm-11">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($CURRENT_PAGE == "About") {?>active<?php }?>" href="about.php">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($CURRENT_PAGE == "Contact") {?>active<?php }?>" href="contact.php">Contact</a>
+                        <a class="nav-link <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="
+                        <?php if (isset($_SESSION['email'])) { ?>
+                            ../dashboard/index.php
+                        <?php }
+                            else{?>
+                                #
+                        <?php    }
+                        ?>
+                        ">
+                            <?php 
+                                if (isset($_SESSION['email'])) {
+                                    echo "<b style='font-size:25px;'>". $_SESSION['first_name'] ." ". $_SESSION['last_name']."</b>";
+                                }
+                                else{
+                                    echo "<b style='font-size:25px;'>Welcome to Fixas-Bank</b>";
+                                }
+                            ?>
+                        </a>
                     </li>
                 </ul>
-            
-                <form class="form-inline nav-right" action="controller/login.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Email" name="email">
-                    <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                    <button class="btn ml-2 btn-primary" type="submit" href="../controller/logout.php">Logout</button>
-                </form>
+                <?php 
+                    if (isset($_SESSION['email'])) {
+                        echo '
+                        <form class="form-inline nav-right" action="../controller/logout.php" method="POST">
+                            <button class="btn btn-primary" type="submit">Logout</button>
+                        </form>';
+                    }
+                    else {
+                        echo '
+                        <form class="form-inline nav-right" action="controller/login.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Email" name="email">
+                            <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password">
+                            <button class="btn btn-primary" type="submit">Login</button>
+                        </form>';
+                    }
+                ?>
             </div>
         </nav>
-        <script>
-            $('.menu, .overlay').click(function () {
-                $('.menu').toggleClass('clicked');
-
-                $('#nav').toggleClass('show');
-
-            });
-        </script>
     </header>

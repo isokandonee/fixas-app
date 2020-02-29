@@ -11,7 +11,7 @@ if (isset($_POST['token'])) {
 
         // Check for empty fields
         if ( empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($cpassword) ) {
-            header("Location: ../index.php?error=incorrectdetails&firstname=".$firstname."lastname=".$lastname."mail=".$email);
+            header("Location: ../index.php?error=emptyfields&firstname=".$firstname."lastname=".$lastname."mail=".$email);
             exit();
         }
 
@@ -39,6 +39,7 @@ if (isset($_POST['token'])) {
             exit();
         }
                 else {
+                    //inserting our values into db
                     $hpassword = password_hash($password, PASSWORD_DEFAULT);
                     $insert = mysqli_query($conn, "INSERT INTO user.user_tb (first_name,last_name,email,password,phone,created_at) 
                     VALUES ('$firstname','$lastname','$email','$hpassword','$phone',current_date())");
@@ -47,14 +48,21 @@ if (isset($_POST['token'])) {
                         exit();
                     }
                     else {
-                        header("Location: ../index.php?error=emailalreadytaken&firstname=".$firstname."lastname=".$lastname);
+                        //Check for duplicate email
+                        $sql="SELECT * FROM user.user_tb WHERE email='$email'";
+                        $result=mysqli_query($conn,$sql);
+                        $r = mysqli_fetch_assoc($result);
+                        $em = $r['email'];
+                        while ($em == $email) {
+                        header("Location: ../index.php?error=emailaltaken&firstname=".$firstname."lastname=".$lastname);
                         exit();
+                        }
                     }
                 }
         mysqli_close($conn);
 
 } else {
-    header("Location: ../index.php?error=signupnotsuccessful");
+    header("Location: ../index.php?error=notsuccessful");
     exit();
     }
 

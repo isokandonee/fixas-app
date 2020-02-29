@@ -11,7 +11,7 @@
                             <div class=" ">
                                 <div class="card-body">
                                     <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
-                                    <h2 class="py-3">Registration</h2>
+                                    <h2 class="py-3">Login</h2>
                                     <p>Please click the below button if you have an account already.</p>
                                     <a class="btn btn-success" href="index.php">Sign up</a>
                                 </div>
