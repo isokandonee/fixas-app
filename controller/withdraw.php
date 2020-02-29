@@ -3,11 +3,10 @@ session_start();
 require "connect.php";
 if(isset($_POST['token'])){
 $id = $_SESSION['id'];
-$ac = sha1($_POST['pass']);
 $am = $_POST['amount'];
 $ttid = 1;
 $ttide = 2;
-$fetch = mysqli_query($conn,"select * from user_account where account_number = '$ac'");
+$fetch = mysqli_query($conn,"select * from transaction where source_id = '$id' OR destination_id = '$id'");
 $a = mysqli_fetch_array($fetch);
 $ide = $a['user_id'];
 $balances = $a['balance'];
@@ -18,13 +17,10 @@ $balance = $b['balance'];
 $bal = $balance - $am;
 $bala = $balances + $am;
 $log=false;
-// echo "ttide ".$ttide." id ".$id." ide ".$ide." am ".$am;
-// echo "ac".$ac;
-// echo "acc".$acc;
 if ($balance < $am) {
     $log = true;
     if ($log) {
-        $msg='The amount you want to transfer is more than your current balance!';
+        $msg='The amount you want to withdraw is more than your current balance!';
         include '../pages/transfer.php';
     }
 }

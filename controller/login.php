@@ -25,7 +25,7 @@ if (isset($_POST['token'])) {
             $_SESSION['email'] = $r['email'];
             $_SESSION['first_name'] = $r['first_name'];
             $_SESSION['last_name'] = $r['last_name'];
-            $_SESSION['user_id'] = $r['d'];
+            $_SESSION['user_id'] = $r['id'];
             header("Location: ../dashboard/index.php?login=success");
             exit();
 

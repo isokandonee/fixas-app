@@ -8,7 +8,14 @@
     exit();
     }
 ?>
+<?php
+    include "../controller/connect.php";
+    $id = $_SESSION['user_id'];
+    $sql = mysqli_query($conn, "SELECT * from transaction WHERE destination_id OR source_id = '$id'");
 
+    $fetch = mysqli_fetch_array($sql);
+
+?>
 <div class="container">
     <h2>Dashboard</h2>
     <div class="row">
@@ -18,7 +25,15 @@
                 <p class="card-header">Account Number</p>
             </div>
             <div class="card-body text-center">
-                <p class="card-text text-warning">Some text inside the first card</p>
+                <p class="card-text text-warning">
+                    <?php
+                        include "../controller/connect.php";
+                        $id = $_SESSION['user_id'];
+                        $sql = mysqli_query($conn, "SELECT * from transaction WHERE destination_id OR source_id = '$id'");
+
+                        $fetch = mysqli_fetch_array($sql);
+                    ?>
+                </p>
             </div>
             </div>
             <div class="card bg-light shadow">
@@ -26,7 +41,21 @@
                 <p class="card-header">Account Balance</p>
             </div>
             <div class="card-body text-center">
-                <p class="card-text text-warning">Some text inside the second card</p>
+                <p class="card-text text-warning">
+                    <?php
+                        include "../controller/connect.php";
+                        $id = $_SESSION['user_id'];
+                        $sql = mysqli_query($conn, "SELECT * from user_account WHERE user_id = '$id'");
+                        $fetch = mysqli_fetch_array($sql);
+                        $acc = $fetch['account_number'];
+                        if ($acc > 0) {
+                            echo $acc;
+                        }
+                        else{
+                            echo "No Account Yet";
+                        }
+                    ?>
+                </p>
             </div>
             </div>
         </div>

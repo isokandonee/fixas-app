@@ -20,11 +20,17 @@ include "../include/header.php";
                                 <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="account">Account Type</label>
+                                        <label for="">Amount to deposit</label>
+                                        <input required placeholder="Amount" type="number" name="amount" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="account">Create Account</label>
                                         <select required class="form-control" id="account" name="account">
-                                            <option name="account" class="form-control-option" value="1">Current</option>
-                                            <option name="account" class="form-control-option" value="2">Savings</option>
-                                            <option name="account" class="form-control-option" value="3">Domiciliary</option>
+                                            <option class="form-control-option" value="Current">Current</option>
+                                            <option class="form-control-option" value="Savings">Savings</option>
+                                            <option class="form-control-option" value="Domiciliary">Domiciliary</option>
                                         </select>
                                     </div>
                                 </div>
