@@ -21,10 +21,10 @@ include "../include/header.php";
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="account">Account Type</label>
-                                        <select class="form-control" id="account">
-                                            <option value="1">Current</option>
-                                            <option value="2">Savings</option>
-                                            <option value="3">Domiciliary</option>
+                                        <select required class="form-control" id="account" name="account">
+                                            <option name="account" class="form-control-option" value="1">Current</option>
+                                            <option name="account" class="form-control-option" value="2">Savings</option>
+                                            <option name="account" class="form-control-option" value="3">Domiciliary</option>
                                         </select>
                                     </div>
                                 </div>
