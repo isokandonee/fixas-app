@@ -10,12 +10,19 @@
 ?>
 
 <div class="container">
+    <h2>Title</h2>
     <div class="row">
-        <div class="col-sm-6 bg-light">
-            
-        </div>
-        <div class="col-sm-6 bg-light">
-            
+        <div class="card-columns">
+            <div class="card bg-light shadow">
+            <div class="card-body text-center">
+                <p class="card-text">Some text inside the first card</p>
+            </div>
+            </div>
+            <div class="card bg-light shadow">
+            <div class="card-body text-center">
+                <p class="card-text">Some text inside the second card</p>
+            </div>
+            </div>
         </div>
     </div>
 </div>

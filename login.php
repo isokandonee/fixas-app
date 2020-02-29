@@ -12,7 +12,23 @@
                                 <div class="card-body">
                                     <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
                                     <h2 class="py-3">Login</h2>
-                                    <p>Please click the below button if you have an account already.</p>
+                                    <p>Please click the below button if you have an account already.</p>                                    
+                                    <?php 
+                                        if (isset($_GET['error'])) {
+                                            if ($_GET['error'] == "emptyfields") {
+                                                echo '<p class="text-danger">Fill in all fields</p>';
+                                            }
+                                            elseif ($_GET['error'] == "invaliddetails") {
+                                                echo '<p class="text-danger">Fill all fields correctly</p>';
+                                            }
+                                            if ($_GET['error'] == "loginnotsuccessful") {
+                                                echo '<p class="text-danger">Check your details and try again</p>';
+                                            }
+                                        }
+                                        elseif (isset($_GET['login' == 'success'])) {
+                                                echo '<p class="text-success">Login Successful</p>';
+                                        }
+                                    ?>
                                     <a class="btn btn-success" href="index.php">Sign up</a>
                                 </div>
                             </div>

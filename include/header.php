@@ -35,12 +35,12 @@
 
 </head>
 <body>
-    <header>
+    <header class="mb-5">
         <nav class="navbar navbar-expand-sm bg-light">
             <div class="container col-sm-11">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="
+                        <a style="font-size:1.1em;"class="nav-link text-success <?php if ($CURRENT_PAGE == "Index") {?>active<?php }?>" href="
                         <?php if (isset($_SESSION['email'])) { ?>
                             ../dashboard/index.php
                         <?php }
@@ -51,7 +51,7 @@
                         ">
                             <?php 
                                 if (isset($_SESSION['email'])) {
-                                    echo "<b style='font-size:25px;'>". $_SESSION['first_name'] ." ". $_SESSION['last_name']."</b>";
+                                    echo  $_SESSION['first_name']." ".$_SESSION['last_name'];
                                 }
                                 else{
                                     echo "<b style='font-size:25px;'>Welcome to Fixas-Bank</b>";
@@ -59,6 +59,22 @@
                             ?>
                         </a>
                     </li>
+                        <?php 
+                            if (isset($_SESSION['email'])) {
+                                echo '
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../dashboard/account.php">Create Account</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../dashboard/deposit.php">Deposit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../dashboard/withdraw.php">Withdraw</a>
+                                </li>
+                                ';
+                            }
+                        ?>
+                        
                 </ul>
                 <?php 
                     if (isset($_SESSION['email'])) {
