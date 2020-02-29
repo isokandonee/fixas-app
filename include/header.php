@@ -51,9 +51,10 @@
                     </li>
                 </ul>
             
-                <form class="form-inline nav-right" action="../controller/login.php">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Email">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Password">
+                <form class="form-inline nav-right" action="controller/login.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Email" name="email">
+                    <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password">
                     <button class="btn btn-primary" type="submit">Login</button>
                     <button class="btn ml-2 btn-primary" type="submit" href="../controller/logout.php">Logout</button>
                 </form>

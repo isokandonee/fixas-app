@@ -1,7 +1,7 @@
 <?php
 
-require "connect.php";
 if (isset($_POST['token'])) {
+        require "connect.php";
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $email = $_POST['email'];
@@ -54,7 +54,7 @@ if (isset($_POST['token'])) {
         mysqli_close($conn);
 
 } else {
-    header("Location: ../index.php?error=notsuccessful");
+    header("Location: ../index.php?error=signupnotsuccessful");
     exit();
     }
 
