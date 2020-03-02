@@ -18,20 +18,37 @@ include "../include/header.php";
                             <h4 class="pb-4 text-center">Create Account</h4>
                             <form class="" action="../controller/account.php" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
+                                <script>
+                                    $('input').click(){
+                                        $('#dis').alert($('input').val());
+                                    }
+                                </script>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="">Amount to deposit</label>
-                                        <input required placeholder="Amount" type="number" name="amount" class="form-control">
+                                        <label for="account" id="dis">Account To Create</label>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="account" value="1">Current
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="account">Create Account</label>
-                                        <select required class="form-control" id="account" name="account">
-                                            <option class="form-control-option" value="Current">Current</option>
-                                            <option class="form-control-option" value="Savings">Savings</option>
-                                            <option class="form-control-option" value="Domiciliary">Domiciliary</option>
-                                        </select>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="account" value="2">Savings
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="account" value="3">Domiciliary
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                     <button type="submit" class="btn mt-4 btn-primary float-right">Create Account</button>                                    
