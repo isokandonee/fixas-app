@@ -49,7 +49,7 @@ if (isset($_POST['token'])) {
                     }
                     else {
                         //Check for duplicate email
-                        $sql="SELECT * FROM user_new.user_tb WHERE email='$email'";
+                        $sql="SELECT * FROM users.user_tb WHERE email='$email'";
                         $result=mysqli_query($conn,$sql);
                         $r = mysqli_fetch_assoc($result);
                         $em = $r['email'];
