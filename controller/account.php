@@ -2,13 +2,12 @@
     if(isset($_POST['token'])){
     session_start();
     require "connect.php";
+        
         $ac_type = $_POST['account'];
         if (!empty($ac_type)) {
-        
         $id = $_SESSION['id'];
-        $status = 1;
-        $insert = mysqli_query($conn,"INSERT INTO use.user_account (user_id,account_type_id,status_id,created_at)
-            values('$id','$ac_type','$status',current_date())");
+        $insert = mysqli_query($conn,"INSERT INTO user_new.user_tb (account_type,user_id,created_at)
+            values('$ac_type','$id',current_date())");
 
         if (!$insert) {
                 echo mysqli_error($conn);
@@ -24,6 +23,7 @@
 
 
 else {
-        header("Location: ../dashboard/account.php?error=accountnotcreated");
+    echo mysqli_error($conn);
+        // header("Location: ../dashboard/account.php?error=accountnotcreated");
         exit();
     }

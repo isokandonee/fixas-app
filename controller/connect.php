@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'use');
+$conn = mysqli_connect('localhost', 'root', '', 'user_new');
 
 // Check if connection to db is successful
 if (!$conn){

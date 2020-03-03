@@ -28,7 +28,7 @@ include "../include/header.php";
                                         <label for="account" id="dis">Account To Create</label>
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="account" value="1">Current
+                                                <input type="radio" class="form-check-input" name="account" value="Current">Current
                                             </label>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@ include "../include/header.php";
                                     <div class="form-group col-md-12">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="account" value="2">Savings
+                                                <input checked type="radio" class="form-check-input" name="account" value="Savings">Savings
                                             </label>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@ include "../include/header.php";
                                     <div class="form-group col-md-12">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="account" value="3">Domiciliary
+                                                <input type="radio" class="form-check-input" name="account" value="Domiciliary">Domiciliary
                                             </label>
                                         </div>
                                     </div>
