@@ -1,48 +1,83 @@
 <?php
 session_start();
-require "connect.php";
-if(isset($_POST['token'])){
-$id = $_SESSION['id'];
-$am = $_POST['amount'];
-$ttid = 1;
-$ttide = 2;
-$fetch = mysqli_query($conn,"select * from transaction where source_id = '$id' OR destination_id = '$id'");
-$a = mysqli_fetch_array($fetch);
-$ide = $a['user_id'];
-$balances = $a['balance'];
-$fetcher = mysqli_query($conn,"select * from user_account where user_id = '$id'");
-$b = mysqli_fetch_array($fetcher);
-$acc = $b['account_number'];
-$balance = $b['balance'];
-$bal = $balance - $am;
-$bala = $balances + $am;
-$log=false;
-if ($balance < $am) {
-    $log = true;
-    if ($log) {
-        $msg='The amount you want to withdraw is more than your current balance!';
-        include '../pages/transfer.php';
-    }
-}
-elseif ($ac == $acc) {
-    $log = true;
-    if ($log) {
-        $msg='You cannot transfer to your own account!';
-        include '../pages/transfer.php';
-    }
-}
-else {
-        $insert = mysqli_query($conn,"insert into transaction (transaction_type_id,source_id,destination_id,amount,created_at)
-            values('$ttide','$id','$ide','$am',current_date())");
-        $inserts = mysqli_query($conn,"insert into transaction (transaction_type_id,source_id,destination_id,amount,created_at)
-            values('$ttid','$ide','$id','$am',current_date())");
-        $update = mysqli_query($conn,"update user_account set balance = $bal, updated_at = current_date() where user_id = $id");
-        $updates = mysqli_query($conn,"update user_account set balance = $bala, updated_at = current_date() where user_id = $ide");
-        header('location:../pages/dashboard.php');
-        echo "<script>alert('Transfer successful!')</script>";
+require_once "connect.php";
+
+class WithdrawController {
+    private $db;
     
-  
+    public function __construct() {
+        $this->db = Database::getInstance()->getConnection();
+    }
+    
+    public function withdraw($userId, $amount) {
+        try {
+            if (!is_numeric($amount) || $amount <= 0) {
+                throw new Exception("Invalid amount");
+            }
+
+            $this->db->beginTransaction();
+            
+            // Get account details
+            $stmt = $this->db->prepare(
+                "SELECT * FROM user_account 
+                WHERE user_id = ? AND status_id = 1"
+            );
+            $stmt->execute([$userId]);
+            $account = $stmt->fetch();
+            
+            if (!$account) {
+                throw new Exception("Invalid account");
+            }
+            
+            if ($account['balance'] < $amount) {
+                throw new Exception("Insufficient funds");
+            }
+            
+            // Record transaction
+            $stmt = $this->db->prepare(
+                "INSERT INTO transaction (transaction_type_id, source_id, destination_id, amount, created_at) 
+                VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)"
+            );
+            $stmt->execute([1, $userId, $userId, $amount]);
+            
+            // Update balance
+            $newBalance = $account['balance'] - $amount;
+            $stmt = $this->db->prepare(
+                "UPDATE user_account 
+                SET balance = ?, updated_at = CURRENT_TIMESTAMP 
+                WHERE user_id = ?"
+            );
+            $stmt->execute([$newBalance, $userId]);
+            
+            $this->db->commit();
+            return true;
+            
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            error_log("Withdrawal error: " . $e->getMessage());
+            return false;
+        }
+    }
+}
+
+if (isset($_POST['token'])) {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../login.php?error=notloggedin");
+        exit();
     }
 
+    $amount = filter_input(INPUT_POST, 'amount', FILTER_VALIDATE_FLOAT);
+    
+    if (!$amount || $amount <= 0) {
+        header("Location: ../dashboard/withdraw.php?error=invalidamount");
+        exit();
+    }
+    
+    $withdraw = new WithdrawController();
+    if ($withdraw->withdraw($_SESSION['user_id'], $amount)) {
+        header("Location: ../dashboard/index.php?success=withdrawal");
+    } else {
+        header("Location: ../dashboard/withdraw.php?error=failed");
+    }
+    exit();
 }
-?>
