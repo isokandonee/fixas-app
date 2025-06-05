@@ -1,44 +1,52 @@
 <?php
+session_start();
+require_once "connect.php";
 
-if (isset($_POST['token'])) {
-    require "connect.php";
-    $email = $_POST['email'];
-    $pass = $_POST['password'];
-    $password = '';
-
-    // Check for empty fields
-    if (empty($email) || empty($pass)) {
-        header("Location: ../login.php?error=emptyfields&email=".$email);
-        exit();
+class LoginController {
+    private $db;
+    
+    public function __construct() {
+        $this->db = Database::getInstance()->getConnection();
     }
-    else {
-        $sql="SELECT * FROM user.user_tb WHERE email='$email'";
-        $result=mysqli_query($conn,$sql);
-        $r = mysqli_fetch_assoc($result);
-        $password = password_verify($pass, $r['password']);
-        if ($password == false) {
-            header("Location: ../login.php?error=invaliddetails");
+    
+    public function login($email, $password) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM user_tb WHERE email = ?");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['first_name'] = $user['first_name'];
+                $_SESSION['last_name'] = $user['last_name'];
+                $_SESSION['user_id'] = $user['id'];
+                
+                header("Location: ../dashboard/index.php?login=success");
+                exit();
+            } else {
+                header("Location: ../login.php?error=invaliddetails");
+                exit();
+            }
+        } catch(PDOException $e) {
+            error_log($e->getMessage());
+            header("Location: ../login.php?error=dberror");
             exit();
         }
-        elseif ($password == true) {
-            session_start();
-            $_SESSION['email'] = $r['email'];
-            $_SESSION['first_name'] = $r['first_name'];
-            $_SESSION['last_name'] = $r['last_name'];
-            $_SESSION['user_id'] = $r['id'];
-            header("Location: ../dashboard/index.php?login=success");
-            exit();
-
-        }
-        else {
-            header("Location: ../login.php?error=loginnotsuccessful");
-            exit();
-        }
-
     }
 }
-else {
-    header("Location: ../login.php?error=loginnotsuccessful");
-    exit();
+
+if (isset($_POST['token'])) {
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+
+    if (empty($email) || empty($password)) {
+        header("Location: ../login.php?error=emptyfields");
+        exit();
     }
 
+    $login = new LoginController();
+    $login->login($email, $password);
+} else {
+    header("Location: ../login.php?error=invalidaccess");
+    exit();
+}

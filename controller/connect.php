@@ -1,12 +1,34 @@
 <?php
-$db_host = "sql8.freemysqlhosting.net";
-$db_user = "sql8527596";
-$db_pass = "9qWHei1rDr";
-$db_name = "sql8527596";
+class Database {
+    private static $instance = null;
+    private $conn;
+    
+    private function __construct() {
+        $db_host = getenv('DB_HOST') ?: "sql8.freemysqlhosting.net";
+        $db_user = getenv('DB_USER') ?: "sql8527596";
+        $db_pass = getenv('DB_PASSWORD') ?: "9qWHei1rDr";
+        $db_name = getenv('DB_NAME') ?: "sql8527596";
 
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+        try {
+            $this->conn = new PDO(
+                "mysql:host=$db_host;dbname=$db_name;charset=utf8mb4",
+                $db_user,
+                $db_pass,
+                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+            );
+        } catch(PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
 
-// Check if connection to db is successful
-if (!$conn){
-    die("Connection failed" .mysqli_connect_error());
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
+    }
+
+    public function getConnection() {
+        return $this->conn;
+    }
 }
