@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /vendor/ 
 .env 
 /node_modules/ 
@@ -7,3 +8,7 @@ debug.log
 /backup-*/ 
 /coverage/ 
 .phpunit.result.cache 
+=======
+node_modules/
+.env
+>>>>>>> 3bec17ba19bb981299d0b5f6cfa98960fa579ca1
