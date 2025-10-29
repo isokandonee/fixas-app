@@ -1,0 +1,9 @@
+/vendor/ 
+.env 
+/node_modules/ 
+.DS_Store 
+debug.log 
+/logs/ 
+/backup-*/ 
+/coverage/ 
+.phpunit.result.cache 

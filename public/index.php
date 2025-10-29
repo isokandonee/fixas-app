@@ -48,7 +48,12 @@
                                     }
                                 ?>
                             <form class="" action="controller/index.php" method="POST" enctype="multipart/form-data">	
-                                <input type="hidden" name="token" value="sdkajsdaksjdklasjdaklsdjalkjs938092qpwoalsdalsdasdasd">
+                                <?php
+                                    require_once "controller/Security.php";
+                                    $security = Security::getInstance();
+                                    $csrf_token = $security->generateCSRFToken();
+                                ?>
+                                <input type="hidden" name="csrf_token" value="<?php echo $security->escapeOutput($csrf_token); ?>">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <input required placeholder="Firstname" type="text" name="firstname" class="form-control">
@@ -67,7 +72,10 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="********" type="password" name="password" class="form-control">
+                                        <input required placeholder="********" type="password" name="password" class="form-control" 
+                                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                               title="Password must contain at least 8 characters, including uppercase, lowercase, numbers and special characters">
+                                        <div id="password-strength" class="password-strength"></div>
                                     </div>
                                     
                                     <div class="form-group col-md-6">
