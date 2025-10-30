@@ -5,7 +5,7 @@ class Database {
     private $connection;
     
     private function __construct() {
-        require_once 'connect.php';
+        require_once __DIR__ . '/connect.php';
         global $conn;
         $this->connection = $conn;
     }

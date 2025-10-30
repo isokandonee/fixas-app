@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "connect.php";
+require_once __DIR__ . '/connect.php';
 $id = $_SESSION['id'];
 $ac = $_POST['account'];
 $am = $_POST['amount'];

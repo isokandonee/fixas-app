@@ -1,5 +1,5 @@
 <?php
-include "../include/header.php";
+require_once __DIR__ . '/header.php';
 ?>
 <?php
     if (!isset($_SESSION['email'])) {        
@@ -34,5 +34,5 @@ include "../include/header.php";
     </div>
 </div>
 <?php
-    include "../include/footer.php";
+    require_once __DIR__ . '/footer.php';
 ?>

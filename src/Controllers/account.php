@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['token'])){
     session_start();
-    require "connect.php";
+    require_once __DIR__ . '/connect.php';
         
         $ac_type = $_POST['account'];
         if (!empty($ac_type)) {

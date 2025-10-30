@@ -1,5 +1,5 @@
 <?php
-    include "../include/header.php";
+    require_once __DIR__ . '/header.php';
 ?>
 
 <?php
@@ -9,7 +9,7 @@
     }
 ?>
 <?php
-    include "../controller/connect.php";
+    require_once __DIR__ . '/../Controllers/connect.php';
     $id = $_SESSION['user_id'];
     $sql = mysqli_query($conn, "SELECT * from transaction WHERE destination_id OR source_id = '$id'");
 
@@ -27,7 +27,7 @@
             <div class="card-body text-center">
                 <p class="card-text text-warning">
                     <?php
-                        include "../controller/connect.php";
+                        require_once __DIR__ . '/../Controllers/connect.php';
                         $id = $_SESSION['user_id'];
                         $sql = mysqli_query($conn, "SELECT * from transaction WHERE destination_id OR source_id = '$id'");
 
@@ -43,7 +43,7 @@
             <div class="card-body text-center">
                 <p class="card-text text-warning">
                     <?php
-                        include "../controller/connect.php";
+                        require_once __DIR__ . '/../Controllers/connect.php';
                         $id = $_SESSION['user_id'];
                         $sql = mysqli_query($conn, "SELECT * from user_account WHERE user_id = '$id'");
                         $fetch = mysqli_fetch_array($sql);
@@ -62,5 +62,5 @@
     </div>
 </div>
 <?php
-    include "../include/footer.php";
+    require_once __DIR__ . '/footer.php';
 ?>

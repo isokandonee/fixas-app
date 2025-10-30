@@ -1,8 +1,8 @@
 <?php
-require_once "Security.php";
-require_once "Database.php";
-require_once "Logger.php";
-require_once "PasswordReset.php";
+require_once __DIR__ . '/Security.php';
+require_once __DIR__ . '/Database.php';
+require_once __DIR__ . '/Logger.php';
+require_once __DIR__ . '/PasswordReset.php';
 
 $security = Security::getInstance();
 $logger = Logger::getInstance();
